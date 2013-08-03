@@ -14,10 +14,15 @@ class GetRowForm extends CAction{
     //put your code here
     public $view;
     public $modelClass;
+    public $processOutput = true;
+    
     public function run() {
         $controller = $this->getController();
         $model = new $this->modelClass;
-        $controller->renderPartial($this->view,array('key'=>$_GET['key'], 'model'=>$model));
+        
+        $form = new DynamicTabularForm();
+        $controller->renderPartial($this->view,array('key'=>$_GET['key'], 'model'=>$model,'form'=>$form),false, $this->processOutput);
+        
     }
 }
 
