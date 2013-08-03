@@ -22,7 +22,7 @@ class DynamicTabularForm extends CActiveForm {
      *
      * @var string view file that is going to be used for initialization
      */
-    public $rowView = '_rowForm';
+    public $defaultRowView = '_rowForm';
     
     
     public $rowViewCounter = 0;
@@ -54,14 +54,17 @@ class DynamicTabularForm extends CActiveForm {
      * @param CModel[] $models 
      * @param array $htmlOptions
      */
-    public function rowForm($models = array(), $htmlOptions = array()) {
+    public function rowForm($models = array(), $rowView=null, $htmlOptions = array()) {
+        if($rowView==null)
+            $rowView = $this->defaultRowView;
+        
         $htmlOptions = array_merge(array('id' => 'row-' . $this->rowViewCounter), $htmlOptions);
         $id = $htmlOptions['id'];
 
         echo CHtml::openTag('div', $htmlOptions);
 
         foreach ($models as $key => $model) {
-            $this->controller->renderPartial($this->rowView, array('key' => $key, 'model' => $model, 'form' => $this));
+            $this->controller->renderPartial($rowView, array('key' => $key, 'model' => $model, 'form' => $this));
         }
         echo "</div>";
 
