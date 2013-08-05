@@ -46,11 +46,10 @@ class DynamicTabularForm extends CActiveForm {
 
         $htmlOptions = array_merge($htmlOptions, array('id' => get_class($model) . '_upateType_' . $htmlOptions['key']));
 
-        return parent::hiddenField($model, $attribute, $htmlOptions);
+        return parent::hiddenField($model, "[$key]".$attribute, $htmlOptions);
     }
 
-    /**
-     * 
+    /** 
      * @param CModel[] $models 
      * @param array $htmlOptions
      */
