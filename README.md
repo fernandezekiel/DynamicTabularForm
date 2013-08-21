@@ -12,13 +12,6 @@ it also uses proccessOutput by default
 
 Controller: SlaController.php
 
-class SlaController extends Controller {
-    public function loadModel($id){
-        $model = Sla::model()->findbyPk($id);
-        if($model == null)
-            throw new CHttpException(404,"Page not found");
-        return $model;
-    }
     public function actions() {
         return array(
             'getRowForm' => array(
@@ -93,7 +86,4 @@ class SlaController extends Controller {
         ));
     }
 
-}
-
-View: create.php
 
